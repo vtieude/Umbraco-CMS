@@ -1,0 +1,219 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = null;
+}
+
+@* the fun starts here *@
+
+@{
+    var currenNode = UmbracoContext.PublishedContentRequest.PublishedContent;
+    var rootNode = Umbraco.TypedContentAtRoot();
+    var menuItems = rootNode.First().Children;
+}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Template</title>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="~/Css/style.css" rel="stylesheet" type="text/css" />
+        <link href="~/Css/styletrangchu.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body lang="vi">
+        <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+        <div id="page-wrap">
+            <header id="header">
+                <div class="header_top">
+                    <div class="container">
+                        <div class="header_left float-left">
+                            <span><i class="glyphicon glyphicon-map-marker"></i> 76 Hà Bổng, Sơn Trà, Đà Nẵng</span>
+                            <span><i class="glyphicon glyphicon-earphone"></i> (+84)236.123.456</span>
+                        </div>
+                        <div class="header_right float-right">
+                            <div class="dropdown language">
+                                <span> Tiếng Việt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_content" id="header_content">
+                    <div class="container">
+                        <div class="header_logo">
+                            <div class="header_logo">
+                                <a href="">
+                                    <img src="http://dananggreeneryhotel.com/public/images/logo-header.png" alt="Da Nang Greenery Hotel Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="header_nav inner">
+                            <!--Strart -->
+                            <nav class="navbar">
+                                <div class="container">
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" >
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right masthead-nav">
+                                        <li><a href="http://localhost:9000">Trang chủ<span class="sr-only">(current)</span></a></li>
+                                                <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Khách sạn <span class="caret"></span></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Thông tin khách sạn</a></li>
+                                                            <li><a href="#">Sự kiện</a></li>
+                                                             <li><a href="#">Hình ảnh</a></li>
+                                                             <li><a href="#">Liên hệ</a></li>
+                                                        </ul>
+                                                 </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" >Dịch vụ <span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#">Nhà hàng</a></li>
+                                                        <li><a href="#">Cho thuê xe</a></li>
+                                                    </ul>
+                                                </li>
+                                            @foreach (var item in menuItems)
+                                            {
+                                                if ((bool)@item.GetProperty("hideInNavigation").Value == false)
+                                                {
+                                                <li><a href="@item.Url">@item.Name</a></li>
+                                                }
+                                            }
+                                            
+                                    </ul>
+                                    </div><!-- /.navbar-collapse -->
+                                </div><!-- /.container-fluid -->
+                                </nav>
+                            <!--End -->
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!--End header-->
+            <section>
+                <div>@RenderBody()</div>
+            </section>
+            <!--End body-->
+            <div class="clearfix"></div>
+            <footer id="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="mailchimp">
+                                    <h4><span class="glyphicon glyphicon-envelope"></span>Tin tức & khuyến mãi</h4>
+                                    <!--<div><span>Email:</span><a href="mailto:xoaytieude@gmail.com">levietvu</a></div>-->
+                                    <div class="mail_form">
+                                        
+                                        <form class="form contact-form mt-10" id="form-subcribe" method="post" accept-charset="utf-8">
+                                            <input type="text" name="email" placeholder="Nhập địa chỉ Email" class="input-text" id="email" />
+                                            <button type="button" class="awe-btn" id="btn-subcrice"> Đăng ký</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="social">
+                                    <div class="social-content">
+                                        <a href=""><i class="fa fa-pinterest"></i></a>
+                                        <a href=""><i class="fa fa-facebook"></i></a>
+                                        <a href=""><i class="fa fa-twitter"></i></a>
+                                        <a href=""><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-5">
+                                <div class="widget widget_logo">
+                                    <div class="widget-logo">
+                                        <div class="img">
+                                            <a href="#">
+                                                <img src="http://dananggreeneryhotel.com/public/images/logo-footer.png" alt="Đà Nẵng Greenery Hotel">
+                                            </a>
+                                        </div>
+                                        <div class="text">
+                                            <p><i class="lotus-icon-location"></i> 76 Hà Bổng, Sơn Trà, Đà Nẵng</p>
+                                            <p><i class="lotus-icon-phone"></i> (+84)236.123.456</p>
+                                            <p>
+                                                <i class="fa fa-envelope-o"></i>
+                                                <a href="#">contact@dananggreeneryhotel.com</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-7 contact-footer">
+                                <div class="col-xs-4 col-lg-4">
+                                    <div class="widget">
+                                        <h4 class="widget-title">Liên Kết</h4>
+                                        <ul>
+                                            <li><a href="#">Phòng Nghỉ</a></li>
+                                            <li><a href="#">Thư Viện Ảnh</a></li>
+                                            <li><a href="#">Khuyến Mãi</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-lg-4">
+                                    <div class="widget">
+                                        <h4 class="widget-title">Khách Sạn</h4>
+                                        <ul>
+                                            <li><a href="#">Giới Thiệu</a></li>
+                                            <li><a href="#">Liên Hệ</a></li>
+                                            <li><a href="#">Tin Tức</a></li>
+                                            <li><a href="http://dananggreeneryhotel.com/vi/danh-muc/su-kien">Sự Kiện</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-lg-4">
+                                    <div class="widget widget_tripadvisor">
+                                        <h4 class="widget-title">Tripadvisor</h4>
+                                        <div class="tripadvisor">
+                                            <img src="http://dananggreeneryhotel.com/public/images/tripadvisor.png" alt="slide2">
+                                            <span class="tripadvisor-circle">
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                                <i class="part"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <p>&copy; 2017 <a href="http://dananggreeneryhotel.com/">Da Nang Greenery Hotel</a> All rights reserved. Develop by <a href="http://itfire-vn.com" target="_blank">ITFire</a></p>
+                    </div>
+                </div>
+            </footer>
+            <!--End Footer-->
+        </div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Master.cshtml";
+}
+
+@* the fun starts here *@
+
+@{
+ var currenNode = UmbracoContext.PublishedContentRequest.PublishedContent;
+ var projects = currenNode.Children;
+}
+<div class="new-item" >
+    <ul>
+        @foreach (var item in projects)
+        {
+            var thumbnail =Umbraco.TypedMedia(@item.GetProperty("thumbnail").Value.ToString());
+            var url = String.Empty;
+            if(thumbnail != null)
+            {
+                url = thumbnail.Url;
+            }
+            <li>
+                 <div class="thumbnail">
+                     <img src="@url" alt="image">
+                 </div>
+                <div class="title">
+                    <a href="@item.Url">@item.Name</a>
+                </div>
+                <div class="date">
+                    @item.GetProperty("moTa").Value.ToString()
+                </div>
+                <div class="mota">
+                    @item.GetProperty("date").Value
+                </div>
+            </li>
+        }
+    </ul>
+</div>

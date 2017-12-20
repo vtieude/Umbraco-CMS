@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Master.cshtml";
+}
+
+@* the fun starts here *@
+@{
+    var currentNode = UmbracoContext.PublishedContentRequest.PublishedContent;
+    var tabs = currentNode.Children;
+    <!--With slide-->
+   /* var galleryArray = currentNode.GetProperty("galary").Value.ToString().Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
+*/}
+<div>
+    <h4>@currentNode.Name</h4>
+    <ul>
+        @foreach (var item in tabs){
+            var thumbnail = Umbraco.TypedMedia(@item.GetProperty("image").Value.ToString());
+            var url = String.Empty;
+            if (thumbnail != null) {
+                url = thumbnail.Url;
+            }
+            <li>
+                
+                <div class="tittle" style="margin-bottom: 20px;">
+                    @Html.Raw(@item.GetProperty("tittle").Value.ToString())
+                </div>
+                <div class="clearfix"></div>
+                <div class="image">
+                    <img src="@url" alt="image">
+                </div>
+                <div class="noidung">
+                    @Html.Raw(@item.GetProperty("noiDung").Value.ToString())
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
